@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+  margin: 0;padding: 0;box-sizing: border-box;
+  color: white;
+  overflow-x: hidden;
+  text-align: center;
+  width: 100%;
+  height: auto;
+}
+
+* {
+  z-index: 100;
+  font-family: "Poppins", system-ui;
+}
+
+.container {
+  width: 100%;
+  height: auto;
+  padding: 150px 0px;
+  background: url('/images/background.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  /* background: transparent; */
+  align-items: center;
+  flex-direction: column;
+}
+.main-head {
+  font-size: 3rem;
+  margin: 0;
+  color: white;
+}
+form {
+  width: 100%;
+}
+#todo-input {
+  width: 70%;
+  padding: 20px;
+  outline: none;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+}
+input::placeholder {
+  color: white;
+}
+textarea::placeholder {
+  color: white;
+}
+textarea {
+  width: 70%;
+  padding: 20px;
+  border: none;
+  font-family: "Poppins", system-ui;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.5);
+  color: white;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+.add-btn {
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: white;
+  font-weight: bolder;
+  border: 2px solid aqua;
+}
+
+.main-todo-container {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background: transparent;
+}
+.todo-card {
+  width: 80%;
+  padding: 20px;
+  text-align: left;
+  background: rgba(207, 207, 207, 0.4);
+  border-radius: 20px;
+  margin: auto;
+}
+.del-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: black;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  font-size: 0.8rem;
+}
+.done-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: rgb(72, 231, 72);
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  font-size: 0.8rem;
+}
+button {
+  transition: transform 0.5s ease-in-out;
+}
+button:active {
+  transform: scale(0.5);
+}
