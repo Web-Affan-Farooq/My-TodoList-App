@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import TodoCard from './todo';
 
 const Page = () => {
@@ -69,7 +69,6 @@ const Page = () => {
             ))
           )}
         </div>
-        {/* <img src={"/images/background.png"} alt={""} className='background'/> */}
       </div>
     </div>
   );
