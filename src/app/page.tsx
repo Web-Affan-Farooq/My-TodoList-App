@@ -1,6 +1,6 @@
 
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect} from 'react';
 import TodoCard from '@/components/TodoCard/TodoCard';
 import { Todos } from '@/@types/Todo';
 import NotifyError from '@/components/Notifications/NotifyError';
@@ -8,8 +8,10 @@ import toast from 'react-hot-toast';
 import Fields from '@/components/Fields/Fields';
 import { supabase } from '@/lib/supabaseClient';
 
+import { TodoListContext } from '@/context/AddTodoContext';
+
 const Page = () => {
-  const [todos, settodos] = useState<Todos[]>([]) // __ for storing todo array
+  const [todos, settodos] = useContext(TodoListContext) // __ for storing todo array
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,8 +27,7 @@ const Page = () => {
       }
     }
     fetchData()
-  }, []);
-
+  }, [todos, settodos]); // dunamically fetches data when state changes with fake element  | missing dependencies 
 
   return (
     <div className='text-white'>

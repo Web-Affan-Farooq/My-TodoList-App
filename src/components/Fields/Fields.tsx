@@ -1,9 +1,11 @@
 "use client"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState , useContext} from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import toast from 'react-hot-toast';
 import NotifyError from '../Notifications/NotifyError';
 import NotifySuccess from '../Notifications/NotifySuccess';
+
+import { TodoListContext } from '@/context/AddTodoContext';
 
 const Fields = () => {
 
@@ -11,10 +13,11 @@ const Fields = () => {
     const [title, settitle] = useState<string>("");
     const [description, setdescription] = useState<string>("")
     const [add, setadd] = useState(false);
+    const [todos,setTodos] = useContext(TodoListContext);
 
     useEffect(() => {
         if (add && title !== "" && description !== "") {
-            const getData = async () => {
+            const AddToList = async () => {
                 const response = await supabase.from("todos").insert([
                     {
                         todo_title: title,
@@ -26,12 +29,24 @@ const Fields = () => {
                     toast.custom(<NotifyError message={`An error occured while adding ${title} to list`} />)
                 }
                 toast.custom(<NotifySuccess message={`${title} added to list`} />)
+
+                const newList = todos;
+                newList.push({
+                    todo_title:title,
+                    todo_description:description,
+                    completed:false,
+                    id:"",
+                });
+                setTodos(newList); // directly assigning new element to state 
+
                 setadd(false)
+                settitle("");
+                setdescription("");
             }
 
-            getData()
+            AddToList()
         }
-    }, [add, title, description]);
+    }, [add, title, description, setTodos, todos]); // added set todos and todos
 
 return (
     <form className='w-full flex flex-col flex-wrap justify-center items-center'>
@@ -70,3 +85,15 @@ return (
 }
 
 export default Fields
+/*
+                const getData = async () => {
+                    const response = await supabase.from("todos").select("*");
+                    if(response.error) {
+                        toast.custom(<NotifyError message={"Error while updating list"}/>)
+                        console.error(response.error);
+                    }
+                    const data = response.data;
+                    if(data) setTodos(response.data)
+                }
+                // getData()
+ */

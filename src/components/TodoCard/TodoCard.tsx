@@ -1,14 +1,18 @@
 "use client";
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState, useContext, useEffect, useMemo} from 'react';
 import { Todos } from '@/@types/Todo';
 import NotifyError from '../Notifications/NotifyError';
 import NotifySuccess from '../Notifications/NotifySuccess';
 import toast from 'react-hot-toast';
 import { supabase } from '@/lib/supabaseClient';
 
-const TodoCard = ({todo}:{todo:Todos}) => {
+import { TodoListContext } from '@/context/AddTodoContext';
 
+const TodoCard = ({todo}:{todo:Todos}) => {
+  const [todos, settodos] = useContext(TodoListContext);
+  
   const memoizeTodo = useMemo(() => todo,[todo])
+  const memoizedList = useMemo(() => todos, [todos]);
   // ___State used for deleting todos
     const [deleteStatus, setdeleteStatus] = useState(false);
     const [doneStatus, setdoneStatus] = useState(false);
@@ -21,13 +25,17 @@ const TodoCard = ({todo}:{todo:Todos}) => {
               toast.custom(<NotifyError message={`Error deleting ${memoizeTodo.todo_title} from list `}/>)
             }
             toast.custom(<NotifySuccess message={`${memoizeTodo.todo_title} successfully deleted from list `}/>)
+            const newList = todos.filter((newTodo:Todos) => {
+              return newTodo.id !== todo.id ;
+            })
+            settodos(newList)
             setdeleteStatus(false)
           }
 
           deleteData()
         }
 
-      },[deleteStatus, memoizeTodo]);
+      },[deleteStatus, memoizeTodo, memoizedList]);
 
       
       useEffect(() => {
@@ -64,3 +72,4 @@ const TodoCard = ({todo}:{todo:Todos}) => {
 }
 
 export default TodoCard;
+/* MuhammadTodo */

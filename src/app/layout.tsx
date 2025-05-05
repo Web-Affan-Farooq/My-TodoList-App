@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import UpdateContextProvider from "@/context/UpdateContext";
 import UpdateValueContextProvider from "@/context/UpdateValue";
+import TodoListProvider from "@/context/AddTodoContext";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
@@ -17,12 +18,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <UpdateContextProvider>
-          <UpdateValueContextProvider>
-          <Toaster reverseOrder={false}/>
-          {children}
-          </UpdateValueContextProvider>
-        </UpdateContextProvider>
+        <TodoListProvider>
+          <UpdateContextProvider>
+            <UpdateValueContextProvider>
+              <Toaster reverseOrder={false} />
+              {children}
+            </UpdateValueContextProvider>
+          </UpdateContextProvider>
+        </TodoListProvider>
       </body>
     </html>
   );
